@@ -34,7 +34,7 @@ df = pd.DataFrame(data)
 st.table(df)
 
 # 첫 번째 PDF 파일 읽기 (파일 이름 변경 후)
-pdf_path1 = "hw5/2023_농작업_안전재해_주요통계.pdf"
+pdf_path1 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"
 try:
     with open(pdf_path1, "rb") as pdf_file1:
         PDFbyte1 = pdf_file1.read()
