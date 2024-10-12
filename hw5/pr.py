@@ -1,7 +1,5 @@
-import smtplib
 import streamlit as st
 import pandas as pd
-from email.mime.text import MIMEText
 
 # 앱 제목
 st.title("농업인의 안전관리 지침")
@@ -35,24 +33,27 @@ df = pd.DataFrame(data)
 # 테이블 표시
 st.table(df)
 
-# PDF 파일 읽기
-pdf_path = "C:/code/pythonProject3/hw5/2023 농작업 안전재해 주요통계.pdf"
-with open(pdf_path, "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
+# 첫 번째 PDF 파일 읽기 (경로 이스케이프 처리)
+pdf_path1 = "hw5/2023\ 농작업\ 안전재해\ 주요통계.pdf"
+try:
+    with open(pdf_path1, "rb") as pdf_file1:
+        PDFbyte1 = pdf_file1.read()
+    st.download_button(label="2023 농작업 안전재해 주요통계 PDF 다운로드",
+                       data=PDFbyte1,
+                       file_name="2023_농작업_안전재해_주요통계.pdf",
+                       mime="application/pdf")
+except FileNotFoundError:
+    st.error("첫 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
 
-pdf_path = "C:\code\pythonProject3\hw5\(2023) 농업인 안전 기본교육자료_농작업 안전재해 예방.pdf"
-with open(pdf_path, "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
-
-# PDF 다운로드 버튼 추가
-st.download_button(label="2023 농작업 안전재해 주요통계 PDF 다운로드",
-                   data=PDFbyte,
-                   file_name="2023_농작업_안전재해_주요통계.pdf",
-                   mime="application/pdf")
-
-# PDF 다운로드 버튼 추가
-st.download_button(label="(2023) 농업인 안전 기본교육자료_농작업 안전재해 예방 PDF 다운로드",
-                   data=PDFbyte,
-                   file_name="2023_농작업_안전 기본교육자료_농작업 안전재해 예방.pdf",
-                   mime="application/pdf")
+# 두 번째 PDF 파일 읽기 (경로 이스케이프 처리)
+pdf_path2 = "hw5/(2023)\ 농업인\ 안전\ 기본교육자료_농작업\ 안전재해\ 예방.pdf"
+try:
+    with open(pdf_path2, "rb") as pdf_file2:
+        PDFbyte2 = pdf_file2.read()
+    st.download_button(label="(2023) 농업인 안전 기본교육자료_농작업 안전재해 예방 PDF 다운로드",
+                       data=PDFbyte2,
+                       file_name="2023_농업인_안전_기본교육자료_농작업_안전재해_예방.pdf",
+                       mime="application/pdf")
+except FileNotFoundError:
+    st.error("두 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
 
