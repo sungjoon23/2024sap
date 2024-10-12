@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import requests
 
 # 앱 제목
 st.title("농업인의 안전관리 지침")
@@ -33,27 +34,28 @@ df = pd.DataFrame(data)
 # 테이블 표시
 st.table(df)
 
-# 첫 번째 PDF 파일 읽기 (파일 이름 변경 후)
-pdf_path1 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"
-try:
-    with open(pdf_path1, "rb") as pdf_file1:
-        PDFbyte1 = pdf_file1.read()
-    st.download_button(label="2023 농작업 안전재해 주요통계 PDF 다운로드",
-                       data=PDFbyte1,
-                       file_name="2023_농작업_안전재해_주요통계.pdf",
-                       mime="application/pdf")
-except FileNotFoundError:
-    st.error("첫 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
+# 이미지 다운로드 URL
+image_url1 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"
+image_url2 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"  # 두 번째 이미지를 별도로 사용한다면 수정
 
-# 두 번째 PDF 파일 읽기 (파일 이름 변경 후)
-pdf_path2 = "hw5/2023_농업인_안전_기본교육자료_농작업_안전재해_예방.pdf"
+# 첫 번째 이미지 다운로드
 try:
-    with open(pdf_path2, "rb") as pdf_file2:
-        PDFbyte2 = pdf_file2.read()
-    st.download_button(label="(2023) 농업인 안전 기본교육자료_농작업 안전재해 예방 PDF 다운로드",
-                       data=PDFbyte2,
-                       file_name="2023_농업인_안전_기본교육자료_농작업_안전재해_예방.pdf",
-                       mime="application/pdf")
-except FileNotFoundError:
-    st.error("두 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
+    img_data1 = requests.get(image_url1).content
+    st.download_button(label="2023 농작업 안전재해 주요통계 이미지 다운로드",
+                       data=img_data1,
+                       file_name="2023_농작업_안전재해_주요통계.png",
+                       mime="image/png")
+except Exception as e:
+    st.error(f"첫 번째 이미지를 다운로드할 수 없습니다. 오류: {e}")
+
+# 두 번째 이미지 다운로드
+try:
+    img_data2 = requests.get(image_url2).content
+    st.download_button(label="(2023) 농업인 안전 기본교육자료 이미지 다운로드",
+                       data=img_data2,
+                       file_name="2023_농업인_안전_기본교육자료.png",
+                       mime="image/png")
+except Exception as e:
+    st.error(f"두 번째 이미지를 다운로드할 수 없습니다. 오류: {e}")
+
 
