@@ -33,8 +33,8 @@ df = pd.DataFrame(data)
 # 테이블 표시
 st.table(df)
 
-# 첫 번째 PDF 파일 읽기 (경로 이스케이프 처리)
-pdf_path1 = "2024sap/hw5/2023\ 농작업\ 안전재해\ 주요통계.pdf"
+# 첫 번째 PDF 파일 읽기 (파일 이름 변경 후)
+pdf_path1 = "2024sap/hw5/2023_농작업_안전재해_주요통계.pdf"
 try:
     with open(pdf_path1, "rb") as pdf_file1:
         PDFbyte1 = pdf_file1.read()
@@ -45,8 +45,8 @@ try:
 except FileNotFoundError:
     st.error("첫 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
 
-# 두 번째 PDF 파일 읽기 (경로 이스케이프 처리)
-pdf_path2 = "2024sap/hw5/(2023)\ 농업인\ 안전\ 기본교육자료_농작업\ 안전재해\ 예방.pdf"
+# 두 번째 PDF 파일 읽기 (파일 이름 변경 후)
+pdf_path2 = "2024sap/hw5/2023_농업인_안전_기본교육자료_농작업_안전재해_예방.pdf"
 try:
     with open(pdf_path2, "rb") as pdf_file2:
         PDFbyte2 = pdf_file2.read()
@@ -56,4 +56,3 @@ try:
                        mime="application/pdf")
 except FileNotFoundError:
     st.error("두 번째 PDF 파일을 찾을 수 없습니다. GitHub에 파일을 올리고 다시 시도하세요.")
-
