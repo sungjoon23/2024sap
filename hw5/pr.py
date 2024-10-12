@@ -36,7 +36,7 @@ st.table(df)
 
 # 이미지 다운로드 URL
 image_url1 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"
-image_url2 = "https://github.com/user-attachments/assets/81fdd542-5c8b-4637-83ca-f72276ab48e4"  # 두 번째 이미지를 별도로 사용한다면 수정
+image_url2 = "https://github.com/user-attachments/assets/a609aff2-6ac6-404c-85f7-243696eed121"  # 두 번째 이미지를 별도로 사용한다면 수정
 
 # 첫 번째 이미지 다운로드
 try:
