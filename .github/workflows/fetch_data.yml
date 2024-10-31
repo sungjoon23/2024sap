@@ -38,10 +38,28 @@ jobs:
           git config --local user.name "2024sap"
           git pull origin main
 
-      - name: Fetch AWS Data
+      # 데이터 처리 및 저장
+      - name: Save Data
         run: |
-          python hw8/fetch_data.py
-          echo "Data fetched at $(date)"
+          if [ -f "path/to/your/file.csv" ]; then
+              python -c "
+import pandas as pd
+df = pd.read_csv('new_data.csv', index_col=0, parse_dates=True)
+existing_df = pd.read_csv('path/to/your/file.csv', index_col=0, parse_dates=True)
+merged_df = pd.concat([existing_df, df], axis=0)
+merged_df = merged_df[~merged_df.index.duplicated(keep='last')]
+merged_df.sort_index(inplace=True)
+merged_df.to_csv('path/to/your/file.csv')
+print('Data has been saved to path/to/your/file.csv.')
+"
+          else
+              cp new_data.csv path/to/your/file.csv
+              echo "Data has been saved to path/to/your/file.csv."
+          fi
+
+      # GitHub Actions 로그에 알림 메시지 출력
+      - name: Notify in GitHub Actions Log
+        run: echo "데이터 왔다: Jeonju의 기상 데이터 받아라~"
 
       # 새로운 데이터를 리포지토리에 커밋
       - name: Commit and push data
@@ -56,7 +74,7 @@ jobs:
           )
 
           # 변경 사항 푸시
-          git push
+          git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
