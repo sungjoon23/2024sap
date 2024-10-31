@@ -1,0 +1,61 @@
+name: Fetch AWS Weather Data Hourly
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # 매 시간마다 실행
+
+jobs:
+  fetch-aws-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 리포지토리 체크아웃
+      - name: Check out repository
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Python 설정
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      # 필요 라이브러리 설치
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas
+
+      # 데이터 가져오는 스크립트 실행
+      - name: Fetch AWS Data
+        run: python hw8/fetch_data.py
+
+      # 리포지토리의 최신 상태 가져오기 (충돌 방지)
+      - name: Pull latest changes
+        run: |
+          git config --local user.email "guaum12@naver.com"
+          git config --local user.name "sap2024"
+          git pull origin main
+
+      - name: Fetch AWS Data
+        run: |
+          python hw8/fetch_data.py
+          echo "Data fetched at $(date)"
+
+      # 새로운 데이터를 리포지토리에 커밋
+      - name: Commit and push data
+        run: |
+          git config --local user.email "guaum12@naver.com"
+          git config --local user.name "sap2024"
+          git add .
+
+          # 데이터가 변경되었는지 확인하는 로그 추가
+          git diff --cached --quiet && echo "No changes to commit" || (
+            git commit -m "Add hourly AWS weather data" && echo "Changes committed"
+          )
+
+          # 변경 사항 푸시
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
