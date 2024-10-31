@@ -55,7 +55,7 @@ jobs:
             git commit -m "Add hourly AWS weather data" && echo "Changes committed"
           )
 
-          # 변경 사항 푸시
-          git push
+           # 변경 사항 푸시
+          git push https://$PAT_TOKEN@github.com/sungjoon23/2024sap.git
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
