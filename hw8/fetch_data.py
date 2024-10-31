@@ -3,15 +3,6 @@ import pandas as pd
 from datetime import datetime
 from io import StringIO
 import os
-import wx
-import wx.adv
-
-# 알림 메시지를 표시하는 함수
-def show_notification(title, message):
-    app = wx.App(False)  # wxPython 앱 객체 생성
-    noti = wx.adv.NotificationMessage(title, message, parent=None, flags=wx.ICON_INFORMATION)
-    noti.Show(timeout=5000)  # 알림 메시지를 5초 동안 표시
-    app.MainLoop()  # 이벤트 루프 실행
 
 # AWS 기상 데이터를 URL에서 받아오는 함수
 def fetch_aws_data(site, dev, year, month, day):
@@ -90,9 +81,6 @@ def save_data(df, city_name):
     merged_df.sort_index(inplace=True)
     merged_df.to_csv(file_path)
     print(f"Data has been saved to {file_path}.")
-
-    # 데이터 저장이 완료되면 알림을 띄움
-    show_notification("데이터 왔다", f"{city_name}의 기상 데이터 받아라~")
 
 # 메인 함수
 def main():
