@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import streamlit as st
 
 # GitHub의 CSV 파일 RAW URL (사용자 제공 링크)
-url = 'https://raw.githubusercontent.com/sungjoon23/sap2024/refs/heads/main/hw8/2024-10/2024.10.Jeonju.csv'
+url = 'https://raw.githubusercontent.com/sungjoon23/2024sap/refs/heads/main/hw8/hw8/2024-10/2024.10.Jeonju.csv'
 
 # Streamlit 앱 제목
 st.title("환경 데이터 그래프")
