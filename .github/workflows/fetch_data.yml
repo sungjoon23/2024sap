@@ -2,7 +2,7 @@ name: Fetch AWS Weather Data Hourly
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Run every hour
+    - cron: '*/1 * * * *'  # Run every hour
 
 jobs:
   fetch-aws-data:
